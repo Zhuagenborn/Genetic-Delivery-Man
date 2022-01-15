@@ -1,0 +1,90 @@
+@startuml Genetic-Delivery-Man
+
+namespace location {
+
+    class City {
+        id: int
+        x: float
+        y: float
+
+        distance(to: City) : float
+    }
+
+    class Map {
+        distance(from: int, to: int) : float
+        city(id: int) : City
+    }
+
+    Map o-- City
+}
+
+namespace delivery {
+
+    class Order {
+        id: int
+        city: int
+        wait_time: float
+        time_limit: float
+    }
+
+    Order --> location.City
+
+    class OrderList {
+        random_route() : Route
+    }
+
+    OrderList o-- Order
+    OrderList ..> Route
+
+    class TimeOnWay {
+        map: Map
+        speed: float
+    }
+
+    TimeOnWay --> location.Map
+
+    class Route {
+        map: Map
+        time_on_way: TimeOnWay
+        origin: City
+        delay: float
+    }
+
+    Route --> TimeOnWay
+}
+
+class ItemCreator
+
+class Item {
+    route: Route
+    fitness: float
+    dna: Sequence[Order]
+}
+
+Item --> delivery.Route
+Item --> delivery.Order
+
+class Population {
+    items: list[Item]
+    best : tuple[int, Item]
+    worst : tuple[int, Item]
+    fitness : list[float]
+    size: int
+
+    generate(size: int, creator: ItemCreator)
+}
+
+Population o-- Item
+Population ..> ItemCreator
+
+class Genetic {
+    population: Population
+    cross_rate: float
+    mutate_rate: float
+
+    evolve(max_iter: int, max_unchanged_iter: int) : Iterator[tuple[int, Item]]
+}
+
+Genetic --> Population
+
+@enduml
