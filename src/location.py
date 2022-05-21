@@ -1,4 +1,5 @@
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
@@ -39,7 +40,7 @@ class Map:
         # Map each city's ID to its array index.
         self._idx: map[int, int] = {cities[i].id: i for i in range(len(cities))}
 
-        self._dists: [list[list[float]]] = [[0 for _ in range(len(cities))] for _ in range(len(cities))]
+        self._dists: list[list[float]] = [[0 for _ in range(len(cities))] for _ in range(len(cities))]
         for i in range(len(cities)):
             for j in range(i + 1, len(cities)):
                 dist = cities[i].distance(cities[j])

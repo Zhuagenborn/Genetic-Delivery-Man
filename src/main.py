@@ -38,7 +38,8 @@ def load_orders(cities: set[int]) -> OrderList:
     """
     Load delivery orders.
     """
-    df = pd.read_csv(Path("data", "orders.csv")).set_index("ID")
+    data_dir = Path(__file__).parent.parent.joinpath("data")
+    df = pd.read_csv(data_dir.joinpath("orders.csv")).set_index("ID")
     if df.index.duplicated(keep=False).any():
         raise ValueError(f"Duplicate orders exist")
     orders = []
@@ -66,7 +67,8 @@ def load_cities(width: int, height: int) -> tuple[list[City], set[int]]:
     """
     Load cities.
     """
-    df = pd.read_csv(Path("data", "cities.csv")).set_index("ID")
+    data_dir = Path(__file__).parent.parent.joinpath("data")
+    df = pd.read_csv(data_dir.joinpath("cities.csv")).set_index("ID")
     if df.index.duplicated(keep=False).any():
         raise ValueError(f"Duplicate cities exist")
     cities = []
@@ -84,7 +86,7 @@ def load_cities(width: int, height: int) -> tuple[list[City], set[int]]:
 
 
 def main():
-    cfg = load_config(Path("config.json"))
+    cfg = load_config(Path(__file__).parent.joinpath("config.json"))
 
     # Load cities and delivery orders.
     width, height = cfg["mapSize"]["width"], cfg["mapSize"]["height"]

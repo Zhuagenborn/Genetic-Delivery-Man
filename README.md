@@ -2,10 +2,11 @@
 
 [![Python](docs/badges/Python-3.10.svg)](https://www.python.org)
 [![License](docs/badges/License-GPL-3.0.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
+[![DOI](https://zenodo.org/badge/370045041.svg)](https://zenodo.org/badge/latestdoi/370045041)
 
-## About The Project
+## Introduction
 
-![Cover](Cover.png)
+![Cover](Cover.gif)
 
 This project uses a genetic model to solve a derivative version of the ***traveling salesman problem*** with time consideration.
 
@@ -175,6 +176,81 @@ When testing a variable, the others are fixed.
 
 ![elitism-test](docs/images/elitism-test.png)
 
+## Class Diagram
+
+```mermaid
+classDiagram
+
+class City {
+    float x
+    float y
+    distance(City) float
+}
+
+class Map {
+    distance(from, to) float
+}
+
+Map o-- City
+
+class Order {
+    City city
+    float wait_time
+    float time_limit
+}
+
+Order --> City
+
+class OrderList {
+    random_route() Route
+}
+
+OrderList o-- Order
+OrderList ..> Route
+
+class TimeOnWay {
+    Map map
+    float speed
+}
+
+TimeOnWay --> Map
+
+class Route {
+    Map map
+    TimeOnWay time_on_way
+    City origin
+    float delay
+}
+
+Route --> TimeOnWay
+
+class Item {
+    Route route
+    float fitness
+    list~Order~ dna
+}
+
+Item --> Route
+Item --> Order
+
+class Population {
+    list~Item~ items
+    list~float~ fitness
+    generate(size)
+}
+
+Population o-- Item
+
+class Genetic {
+    Population population
+    float cross_rate
+    float mutate_rate
+    evolve(max_iter, max_unchanged_iter)
+}
+
+Genetic --> Population
+```
+
 ## Dependencies
 
 [*pygame*](https://www.pygame.org)
@@ -187,10 +263,33 @@ When testing a variable, the others are fixed.
 
 Distributed under the *GNU General Public License*. See `LICENSE` for more information.
 
+## Citing
+
+```tex
+@software{chenzs108_2021_4885148,
+  author       = {Chen Zhenshuo and Liu Guowen},
+  title        = {czs108/Genetic-Delivery-Man: v1.0.0},
+  month        = jun,
+  year         = 2021,
+  publisher    = {Zenodo},
+  version      = {v1.0.0},
+  doi          = {10.5281/zenodo.4885148},
+  url          = {https://doi.org/10.5281/zenodo.4885148}
+}
+```
+
 ## Contact
 
-***GitHub***: https://github.com/czs108
+- ***Chen Zhenshuo***
 
-***E-Mail***: chenzs108@outlook.com
+  > ***GitHub***: https://github.com/czs108
+  >
+  > ***E-Mail***: chenzs108@outlook.com
+  >
+  > ***WeChat***: chenzs108
 
-***WeChat***: chenzs108
+- ***Liu Guowen***
+
+  > ***GitHub***: https://github.com/lgw1995
+  >
+  > ***E-Mail***: liu.guowen@outlook.com
