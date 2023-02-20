@@ -1,0 +1,26 @@
+{
+    "speed": 100,
+
+    "mapSize": {
+        "height": 600,
+        "width": 800
+    },
+
+    "fps": 0,
+
+    "showCityID": true,
+
+    "elitism": true,
+
+    "populationSize": 100,
+
+    "rate": {
+        "cross": 0.4,
+        "mutate": 0.01
+    },
+
+    "maxIter": {
+        "total": 2000,
+        "unchanged": 0
+    }
+}

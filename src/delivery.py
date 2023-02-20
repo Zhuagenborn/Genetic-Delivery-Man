@@ -58,7 +58,7 @@ class TimeOnWay:
         self.map: Map = map
         self.speed: float = speed
 
-        self._times: [list[list[float]]] = [[-1 for _ in range(len(self.map.cities))] for _ in range(len(self.map.cities))]
+        self._times: list[list[float]] = [[-1 for _ in range(len(self.map.cities))] for _ in range(len(self.map.cities))]
 
         # Map each city's ID to its array index.
         self._city_idx: map[int, int] = {self.map.cities[i].id: i for i in range(len(self.map.cities))}
