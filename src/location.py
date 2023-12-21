@@ -1,7 +1,4 @@
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from collections.abc import Sequence
+from collections.abc import Sequence
 
 
 class City:
@@ -12,7 +9,7 @@ class City:
         self.x: float = x
         self.y: float = y
 
-    def distance(self, city: City) -> float:
+    def distance(self, city: 'City') -> float:
         """
         Calculate the distance between two cities.
         :param city: Another city.

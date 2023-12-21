@@ -1,10 +1,7 @@
-from typing import TYPE_CHECKING
+from collections.abc import Sequence
 from random import shuffle
 
 from location import Map, City
-
-if TYPE_CHECKING:
-    from collections.abc import Sequence
 
 
 class Order:
@@ -39,7 +36,7 @@ class OrderList:
         """
         return self._orders[id]
 
-    def random_route(self) -> Route:
+    def random_route(self) -> 'Route':
         """
         Randomly generate a route containing all orders.
         :return: A route.

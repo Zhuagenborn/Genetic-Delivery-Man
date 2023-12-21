@@ -1,13 +1,10 @@
-from typing import TYPE_CHECKING
+from collections.abc import Iterator, Callable, Sequence
 from copy import copy
 
 import numpy as np
 
 from delivery import Route
-
-if TYPE_CHECKING:
-    from collections.abc import Iterator, Callable, Sequence
-    from delivery import Order
+from delivery import Order
 
 
 class Item:
@@ -30,8 +27,7 @@ class Item:
         return self.route.orders
 
 
-if TYPE_CHECKING:
-    ItemCreator = Callable[[], Item]
+ItemCreator = Callable[[], Item]
 
 
 class Population:
@@ -86,7 +82,7 @@ class Population:
         """
         return len(self.items)
 
-    def __copy__(self) -> Population:
+    def __copy__(self) -> 'Population':
         new_ins = Population()
         new_ins.items = self.items.copy()
         return new_ins
